@@ -179,17 +179,17 @@ This 5-case perturbation grid (Clinical K5, Clinical K10, Random K5, Random K10,
 run across all **6 models** and **3 prompt scenarios** — the scenario notebooks hold the prompt
 template fixed while the perturbation case (input file) and model vary:
 
-| Scenario | Notebook | Prompt content |
+| Scenario | Notebook | Prompt |
 |---|---|---|
-| Scenario 1 — Base/Normal | `scenario1_base_normal.ipynb` | Vanilla hub prompt: ROI, degree, cohort z-score only. No prompt engineering, no network attribute. |
-| Scenario 2 — Prompt (engineered) | `scenario2_prompt.ipynb` | Same fields as Scenario 1, plus an injected ADHD domain-knowledge sentence (reduced frontal-striatal hub strength, altered DMN hub connectivity). |
-| Scenario 3 — Prompt + Net | `scenario3_prompt_net.ipynb` | Scenario 2's domain-knowledge sentence, plus each hub's Yeo-7 functional-network membership. |
+| Scenario 1 — Base/Normal | `scenario1_base_normal.ipynb` |  The following are the top 20 positive ROI-degree-based hub regions identified from the subject's resting-state functional connectivity graph. |
+| Scenario 2 — Prompt (engineered) | `scenario2_prompt.ipynb` | The top 20 positive ROI-degree-based hub regions extracted from the subject's resting-state functional connectivity graph. ADHD has been associated with reduced frontal-striatal hub strength and altered default mode network (DMN) hub connectivity. Each hub includes its ROI, degree (number of positive connections), and cohort_z (deviation from the cohort mean; positive = above average, negative = below average). |
+| Scenario 3 — Prompt + Net | `scenario3_prompt_net.ipynb` | The top 20 positive ROI-degree-based hub regions extracted from the subject's resting-state functional connectivity graph. ADHD has been associated with reduced frontal-striatal hub strength and altered default mode network (DMN) hub connectivity. Each hub includes its ROI, degree (number of positive connections), cohort_z (deviation from the cohort mean; positive = above average, negative = below average), and network (Yeo-7 functional network membership). |
 
 **Scenario 1 (Base/Normal) prompt:**
 
 ```
 Template: {DATASET_NAME} dataset, {PREPROCESS_TEMPLATE} atlas, 116 ROIs.
-Description: The following are the top 20 positive ROI-degree-based hub regions identified from the subject's resting-state functional connectivity graph.
+Description: <see above table>
 Task: Based ONLY on the hub regions below, analyze the brain's most important hub regions and
 predict whether the subject belongs to Control or ADHD. Provide a confidence score (0-1) for both classes.
 Request: Your output must strictly follow this JSON structure and contain nothing else:
