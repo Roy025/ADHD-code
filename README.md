@@ -50,7 +50,7 @@ RQ5/               Reasoning Fidelity -- rationale vs. evidence comparison acros
 
 ---
 
-## RQ1 + RQ2 — Knowledge Source & Statistical Context (`RQ_1_2/`)
+## RQ1 + RQ2 — Knowledge Source & Statistical Context
 
 A 3×2 grid of prompt variants over the **same** underlying FC graph, isolating two independent
 factors:
@@ -74,12 +74,17 @@ factors:
 
 **Shared prompt skeleton** (only the `Description` line and node/edge encoding change between
 scenarios):
-
+1. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions, identified only by their numeric index (no region names provided); edges represent the strength of functional connectivity between two regions.
+2. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions; edges represent the strength of functional connectivity between two regions. Region names for each node index: Node 1=Precentral_L, Node 2=Precentral_R,....
+3. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions, identified by their anatomical region name (AAL atlas); edges represent the strength of functional connectivity between two named regions.
+4. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions, identified only by their numeric index (no region names provided); edges represent the connectivity strength between two regions as a cohort z-score (not a raw correlation). No node-level features are included, only the ranked list of edges.
+5. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions; edges represent the connectivity strength between two regions as a cohort z-score (not a raw correlation). No node-level features are included, only the ranked list of edges. Region names for each node index: Node 1=Precentral_L, Node 2=Precentral_R, ...
+6. Description: The following is a functional connectivity brain graph for one subject, extracted from resting-state fMRI. Nodes represent brain regions; edges represent the connectivity strength between two regions as a cohort z-score (not a raw correlation), identified by their anatomical region name (AAL atlas). No node-level features are included, only the ranked list of edges. 
 ```
 Template: This data comes from the {DATASET_NAME} dataset, preprocessed using the {PREPROCESS_TEMPLATE}
 brain atlas template (116 regions of interest).
 Description: <varies by scenario -- see table above>
-Task: <task description>
+Task: interpreting functional connectivity patterns and reasoning about the most likely diagnostic group
 Request: Analyze the BrainGraph node features and edge list below. Find the main connectivity
 patterns and the most important features. Then predict whether the subject belongs to Control or
 ADHD. Give a confidence score (0-1) for both classes. Your output must strictly follow this JSON
@@ -96,7 +101,7 @@ BrainGraph (Text format):
 
 ---
 
-## RQ3 — Structural Property Identification (`RQ3/`)
+## RQ3 — Structural Property Identification
 
 Two complementary prompt families, testing structural competence directly:
 
@@ -125,40 +130,43 @@ identify hubs, count how many times each region name appears across the connecti
 regions appearing most frequently are the most connected.
 
 **Example**
-<worked toy-graph example with explicit counting>
+- Regions in the network: Frontal_Sup_L, Frontal_Sup_R, Parietal_Inf_L, Occipital_Mid_L, Temporal_Sup_R
+- Functional connections: Frontal_Sup_L to Parietal_Inf_L, Frontal_Sup_L to Occipital_Mid_L, Frontal_Sup_L to Temporal_Sup_R, Parietal_Inf_L to Occipital_Mid_L
+
+In this network, we have the following regions and connections: Frontal_Sup_L, Frontal_Sup_R, Parietal_Inf_L, Occipital_Mid_L, and Temporal_Sup_R. The connections are: Frontal_Sup_L to Parietal_Inf_L, Frontal_Sup_L to Occipital_Mid_L, Frontal_Sup_L to Temporal_Sup_R, and Parietal_Inf_L to Occipital_Mid_L. Counting connections per region: Frontal_Sup_L appears 3 times, Parietal_Inf_L appears 2 times, Occipital_Mid_L appears 2 times, Temporal_Sup_R appears 1 time, and Frontal_Sup_R appears 0 times. The region with the highest connection count is Frontal_Sup_L. Therefore, the top hub is [Frontal_Sup_L].
+
 
 **Problem to Solve**
-- Regions in the network: <all 116 AAL region names>
-- Functional connections: RegionA to RegionB, ...
+- Regions in the network: Precentral_L, Precentral_R, Frontal_Sup_L, Frontal_Sup_R,....
+- Functional connections: Temporal_Sup_L to Temporal_Sup_R, Rectus_L to Rectus_R, ...
 
 Identify the top {k} hub regions in this network, ranked from most to least connected.
 Present your answer in the following format: [Region1, Region2, ..., Region{k}]
 ```
 
-**Classification prompt (used by both families, `hub_line` / `community_line` optionally
-injected when self-identified or ground-truth structure is available):**
+**Classification prompt :**
 
 ```
-Template: This data comes from the {DATASET_NAME} dataset, preprocessed using the {PREPROCESS_TEMPLATE}
-brain atlas template (116 regions of interest).
-Description: Functional connectivity edges for one subject from resting-state fMRI. Format:
-RegionA:weight:RegionB, identified by their anatomical region name (AAL atlas).
-Task: Based on the edge list below [and the identified hub regions / network pairs], predict
-Control or ADHD with a confidence score for each class.
-Request: Output only this JSON:
-{
-  "prediction": "Control or ADHD",
-  "class_confidence": {"Control": 0.0, "ADHD": 0.0},
-  "reasoning": "(1-2 sentence)"
-}
-Edges:
-<edge list>
-[Identified hub regions (highest connectivity): ...]
+COMMUNITY PROMPT (INPUT) ---
+You are required to identify the most densely connected functional network pairs in the given brain functional connectivity network and output the top pairs ranked by connectivity.
+Each region belongs to one of 8 functional groupings: the 7 Yeo networks (Vis, SomMot, DorsAttn, SalVentAttn, Limbic, Cont, Default) plus 'Unassigned' for regions with no cortical Yeo-7 overlap. A network pair (same network twice for within-network, or two different networks for between-network) is highly connected if its regions appear frequently together across the connection list. To identify the top pairs, count how many times each network pair appears across the connection list -- pairs appearing most frequently are the most connected.
+
+**Example**
+- Regions and their networks: Frontal_Sup_L (Cont), Frontal_Sup_R (Cont), Parietal_Inf_L (DorsAttn), Occipital_Mid_L (Vis), Temporal_Sup_R (SalVentAttn)
+- Functional connections: Frontal_Sup_L to Parietal_Inf_L, Frontal_Sup_R to Parietal_Inf_L, Frontal_Sup_L to Occipital_Mid_L, Frontal_Sup_L to Temporal_Sup_R, Parietal_Inf_L to Occipital_Mid_L, Frontal_Sup_L to Frontal_Sup_R
+In this network, the regions belong to four functional networks: Cont (Frontal_Sup_L, Frontal_Sup_R), DorsAttn (Parietal_Inf_L), Vis (Occipital_Mid_L), and SalVentAttn (Temporal_Sup_R). Counting connections for each network pair (same network on both ends = within-network, different networks = between-network): Frontal_Sup_L to Parietal_Inf_L and Frontal_Sup_R to Parietal_Inf_L are both Cont-DorsAttn, so Cont-DorsAttn appears 2 times. Frontal_Sup_L to Occipital_Mid_L is Cont-Vis (1 time). Frontal_Sup_L to Temporal_Sup_R is Cont-SalVentAttn (1 time). Parietal_Inf_L to Occipital_Mid_L is DorsAttn-Vis (1 time). Frontal_Sup_L to Frontal_Sup_R is Cont-Cont, a within-network connection (1 time). Ranking all network pairs by connection count: the network pair with the highest number of connections is Cont-DorsAttn with 2 connections. Therefore, the top 5 network pairs are [Cont-DorsAttn, Cont-Vis, Cont-SalVentAttn, DorsAttn-Vis, Cont-Cont], where Cont-Cont is the only within-network pair among them.
+
+**Problem to Solve**
+- Regions and their networks: Precentral_L (SomMot), Precentral_R (SomMot), ...
+- Functional connections: Temporal_Sup_L (SomMot) to Temporal_Sup_R (SomMot), Rectus_L (Limbic) to Rectus_R (Limbic), ...
+
+Identify the top {top_k} network pairs in this network, ranked from most to least connected. Present your answer in the following format: [Pair1, Pair2, Pair3, ..., Pair{top_k}]"""
+
 ```
 
 ---
 
-## RQ4 — Perturbation Design (`RQ4/`)
+## RQ4 — Perturbation Design
 
 Tests robustness of the classifier to *swapped* hub information: for each subject, the top hub
 regions are perturbed by replacing them with either **clinically-informed** substitutes (regions
@@ -181,19 +189,16 @@ template fixed while the perturbation case (input file) and model vary:
 
 ```
 Template: {DATASET_NAME} dataset, {PREPROCESS_TEMPLATE} atlas, 116 ROIs.
-Description: The following are the top 20 positive ROI-degree-based hub regions identified from
-the subject's resting-state functional connectivity graph.
+Description: The following are the top 20 positive ROI-degree-based hub regions identified from the subject's resting-state functional connectivity graph.
 Task: Based ONLY on the hub regions below, analyze the brain's most important hub regions and
-predict whether the subject belongs to Control or ADHD. Provide a confidence score (0-1) for both
-classes.
+predict whether the subject belongs to Control or ADHD. Provide a confidence score (0-1) for both classes.
 Request: Your output must strictly follow this JSON structure and contain nothing else:
 {
   "prediction": "Control or ADHD",
   "class_confidence": {"Control": 0.0, "ADHD": 0.0},
   "reasoning": "(exactly 1-2 short sentences, no more)"
 }
-Hub regions:
-<ROI - degree:N cohort_z:X.XX; ...>
+Hub regions: Cingulum_Post_R - degree:22 cohort_z:2.75; Parietal_Sup_L - degree:20 cohort_z:2.68;...
 ```
 
 **Scenario 2 (Prompt-engineered)** adds to the `Description`: *"ADHD has been associated with
