@@ -17,7 +17,7 @@ DeepSeek-R1-Distill-Qwen-14B, Qwen2.5-14B-Instruct, Qwen3-14B, GPT-Luna, DeepSee
 |----|------|--------|----------|
 | **RQ1** | Knowledge Source | [`RQ_1_2/`](RQ_1_2/) | Does giving the model anatomical ROI *names* (vs. bare numeric node indices) change classification behavior — i.e. is the model leaning on prior world knowledge about brain regions rather than the connectivity structure? |
 | **RQ2** | Statistical Context | [`RQ_1_2/`](RQ_1_2/) | Does the *statistical framing* of edge weights (raw Pearson correlation vs. cohort z-score) change classification behavior, independent of node identification? |
-| **RQ3** | Structural Property Identification | [`RQ3/`](RQ3/) | Can the model correctly identify graph-theoretic structural properties (hub regions, functional-network communities) directly from the raw edge list, and does handing it the correct structure (ground truth) help classification? |
+| **RQ3** | Structural Property Identification | [`RQ3/`](RQ3/) | Can the model correctly identify graph-theoretic structural properties (hub regions, functional-network connectivities) directly from the FC edge list, and does handing it the correct structure (ground truth) help classification? |
 | **RQ4** | Perturbation Design | [`RQ4/`](RQ4/) | How sensitive is the model's prediction to *swapped* hub information — clinically-informed vs. random perturbation — and does that sensitivity change with prompt engineering or added network-membership context? |
 | **RQ5** | Reasoning Fidelity | [`RQ5/`](RQ5/) | When the model produces a free-text rationale for its prediction, is that rationale actually *faithful* to the numeric graph evidence it was given, or is it a plausible-sounding but disconnected post-hoc story? |
 
