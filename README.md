@@ -212,6 +212,311 @@ holds pairwise McNemar test results (perturbed vs. unperturbed predictions) acro
 model × scenario × case combinations; `results/` contains the summary heatmap
 (`heatmap_combined.png` / `.pdf`).
 
+
+
+
+### Classification Accuracy Across Scenarios
+
+Accuracy is calculated from each saved prediction file using scorable subjects only. Each percentage includes the correct/total count; ADHD and Control denominators include only scorable subjects from that ground-truth class. `No perturb` is the unmodified-hub control; K5/K10 rows use clinical or random hub perturbations.
+
+<details>
+<summary>DeepSeek-V4</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 51.7% (394/762) | 44.4% (123/277) | 55.9% (271/485) |
+| Hub | Clinical K5 | 47.3% (346/732) | 64.9% (172/265) | 37.3% (174/467) |
+| Hub | Clinical K10 | 54.3% (401/738) | 61.4% (167/272) | 50.2% (234/466) |
+| Hub | Random K5 | 48.6% (356/733) | 62.2% (166/267) | 40.8% (190/466) |
+| Hub | Random K10 | 50.2% (368/733) | 61.5% (163/265) | 43.8% (205/468) |
+| Hub + Prompt | No perturb | 56.2% (408/726) | 20.9% (55/263) | 76.2% (353/463) |
+| Hub + Prompt | Clinical K5 | 57.8% (443/767) | 15.0% (42/280) | 82.3% (401/487) |
+| Hub + Prompt | Clinical K10 | 59.2% (453/765) | 20.0% (56/280) | 81.9% (397/485) |
+| Hub + Prompt | Random K5 | 56.2% (420/747) | 14.1% (38/269) | 79.9% (382/478) |
+| Hub + Prompt | Random K10 | 59.7% (445/746) | 23.0% (62/270) | 80.5% (383/476) |
+| Hub + Prompt + Net | No perturb | 54.1% (407/752) | 32.7% (90/275) | 66.5% (317/477) |
+| Hub + Prompt + Net | Clinical K5 | 56.9% (436/766) | 31.2% (87/279) | 71.7% (349/487) |
+| Hub + Prompt + Net | Clinical K10 | 57.0% (435/763) | 35.8% (100/279) | 69.2% (335/484) |
+| Hub + Prompt + Net | Random K5 | 53.2% (407/765) | 28.8% (80/278) | 67.1% (327/487) |
+| Hub + Prompt + Net | Random K10 | 55.9% (427/764) | 38.1% (106/278) | 66.0% (321/486) |
+
+</details>
+
+<details>
+<summary>DeepSeek-R1-Distill</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 50.5% (382/757) | 70.0% (194/277) | 39.2% (188/480) |
+| Hub | Clinical K5 | 43.0% (321/747) | 83.3% (225/270) | 20.1% (96/477) |
+| Hub | Clinical K10 | 39.9% (296/741) | 91.1% (245/269) | 10.8% (51/472) |
+| Hub | Random K5 | 45.5% (285/626) | 51.5% (119/231) | 42.0% (166/395) |
+| Hub | Random K10 | 42.5% (318/748) | 89.4% (245/274) | 15.4% (73/474) |
+| Hub + Prompt | No perturb | 61.6% (395/641) | 18.3% (43/235) | 86.7% (352/406) |
+| Hub + Prompt | Clinical K5 | 51.0% (293/575) | 53.7% (116/216) | 49.3% (177/359) |
+| Hub + Prompt | Clinical K10 | 48.9% (266/544) | 66.8% (131/196) | 38.8% (135/348) |
+| Hub + Prompt | Random K5 | 49.0% (302/616) | 52.2% (117/224) | 47.2% (185/392) |
+| Hub + Prompt | Random K10 | 47.2% (250/530) | 63.6% (126/198) | 37.3% (124/332) |
+| Hub + Prompt + Net | No perturb | 61.5% (441/717) | 2.7% (7/260) | 95.0% (434/457) |
+| Hub + Prompt + Net | Clinical K5 | 53.5% (363/679) | 34.4% (87/253) | 64.8% (276/426) |
+| Hub + Prompt + Net | Clinical K10 | 51.9% (337/649) | 54.2% (130/240) | 50.6% (207/409) |
+| Hub + Prompt + Net | Random K5 | 52.5% (348/663) | 34.2% (80/234) | 62.5% (268/429) |
+| Hub + Prompt + Net | Random K10 | 53.6% (327/610) | 41.9% (95/227) | 60.6% (232/383) |
+
+</details>
+
+<details>
+<summary>Llama</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 52.9% (406/768) | 41.4% (116/280) | 59.4% (290/488) |
+| Hub | Clinical K5 | 45.8% (352/768) | 66.4% (186/280) | 34.0% (166/488) |
+| Hub | Clinical K10 | 49.5% (380/768) | 58.9% (165/280) | 44.1% (215/488) |
+| Hub | Random K5 | 50.3% (386/768) | 58.9% (165/280) | 45.3% (221/488) |
+| Hub | Random K10 | 53.6% (412/768) | 45.0% (126/280) | 58.6% (286/488) |
+| Hub + Prompt | No perturb | 49.5% (380/768) | 53.2% (149/280) | 47.3% (231/488) |
+| Hub + Prompt | Clinical K5 | 43.9% (337/768) | 78.2% (219/280) | 24.2% (118/488) |
+| Hub + Prompt | Clinical K10 | 44.7% (343/768) | 68.9% (193/280) | 30.7% (150/488) |
+| Hub + Prompt | Random K5 | 42.2% (324/768) | 75.0% (210/280) | 23.4% (114/488) |
+| Hub + Prompt | Random K10 | 47.1% (362/768) | 50.4% (141/280) | 45.3% (221/488) |
+| Hub + Prompt + Net | No perturb | 56.0% (430/768) | 33.9% (95/280) | 68.6% (335/488) |
+| Hub + Prompt + Net | Clinical K5 | 51.6% (396/768) | 38.2% (107/280) | 59.2% (289/488) |
+| Hub + Prompt + Net | Clinical K10 | 54.0% (415/768) | 48.6% (136/280) | 57.2% (279/488) |
+| Hub + Prompt + Net | Random K5 | 51.2% (393/768) | 33.9% (95/280) | 61.1% (298/488) |
+| Hub + Prompt + Net | Random K10 | 55.3% (425/768) | 27.9% (78/280) | 71.1% (347/488) |
+
+</details>
+
+<details>
+<summary>Qwen2.5</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 63.5% (488/768) | 1.8% (5/280) | 99.0% (483/488) |
+| Hub | Clinical K5 | 63.0% (484/768) | 1.1% (3/280) | 98.6% (481/488) |
+| Hub | Clinical K10 | 63.0% (484/768) | 0.7% (2/280) | 98.8% (482/488) |
+| Hub | Random K5 | 63.4% (487/768) | 2.5% (7/280) | 98.4% (480/488) |
+| Hub | Random K10 | 63.5% (488/768) | 0.7% (2/280) | 99.6% (486/488) |
+| Hub + Prompt | No perturb | 63.4% (487/768) | 0.0% (0/280) | 99.8% (487/488) |
+| Hub + Prompt | Clinical K5 | 62.6% (481/768) | 2.9% (8/280) | 96.9% (473/488) |
+| Hub + Prompt | Clinical K10 | 63.2% (485/768) | 2.9% (8/280) | 97.7% (477/488) |
+| Hub + Prompt | Random K5 | 62.8% (482/768) | 3.6% (10/280) | 96.7% (472/488) |
+| Hub + Prompt | Random K10 | 57.2% (439/768) | 8.9% (25/280) | 84.8% (414/488) |
+| Hub + Prompt + Net | No perturb | 63.5% (488/768) | 0.0% (0/280) | 100.0% (488/488) |
+| Hub + Prompt + Net | Clinical K5 | 63.7% (489/768) | 0.4% (1/280) | 100.0% (488/488) |
+| Hub + Prompt + Net | Clinical K10 | 63.3% (486/768) | 1.1% (3/280) | 99.0% (483/488) |
+| Hub + Prompt + Net | Random K5 | 63.8% (490/768) | 1.1% (3/280) | 99.8% (487/488) |
+| Hub + Prompt + Net | Random K10 | 61.8% (475/768) | 5.0% (14/280) | 94.5% (461/488) |
+
+</details>
+
+<details>
+<summary>Qwen3</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 41.1% (316/768) | 87.1% (244/280) | 14.8% (72/488) |
+| Hub | Clinical K5 | 41.1% (316/768) | 93.6% (262/280) | 11.1% (54/488) |
+| Hub | Clinical K10 | 38.5% (296/768) | 92.9% (260/280) | 7.4% (36/488) |
+| Hub | Random K5 | 50.9% (391/768) | 65.0% (182/280) | 42.8% (209/488) |
+| Hub | Random K10 | 38.4% (295/768) | 88.6% (248/280) | 9.6% (47/488) |
+| Hub + Prompt | No perturb | 58.1% (446/768) | 13.9% (39/280) | 83.4% (407/488) |
+| Hub + Prompt | Clinical K5 | 46.7% (359/768) | 69.6% (195/280) | 33.6% (164/488) |
+| Hub + Prompt | Clinical K10 | 42.8% (329/768) | 86.1% (241/280) | 18.0% (88/488) |
+| Hub + Prompt | Random K5 | 47.0% (361/768) | 64.3% (180/280) | 37.1% (181/488) |
+| Hub + Prompt | Random K10 | 41.7% (320/768) | 80.0% (224/280) | 19.7% (96/488) |
+| Hub + Prompt + Net | No perturb | 57.8% (444/768) | 20.7% (58/280) | 79.1% (386/488) |
+| Hub + Prompt + Net | Clinical K5 | 42.7% (328/768) | 77.5% (217/280) | 22.7% (111/488) |
+| Hub + Prompt + Net | Clinical K10 | 39.3% (302/768) | 91.1% (255/280) | 9.6% (47/488) |
+| Hub + Prompt + Net | Random K5 | 41.8% (321/768) | 70.7% (198/280) | 25.2% (123/488) |
+| Hub + Prompt + Net | Random K10 | 41.9% (322/768) | 86.1% (241/280) | 16.6% (81/488) |
+
+</details>
+
+<details>
+<summary>GPT-Luna</summary>
+
+| Scenario | Perturbation | Overall accuracy | ADHD accuracy | Control accuracy |
+|:--|:--|--:|--:|--:|
+| Hub | No perturb | 41.3% (317/768) | 90.0% (252/280) | 13.3% (65/488) |
+| Hub | Clinical K5 | 41.2% (316/767) | 83.6% (234/280) | 16.8% (82/487) |
+| Hub | Clinical K10 | 40.7% (312/766) | 86.0% (239/278) | 15.0% (73/488) |
+| Hub | Random K5 | 42.7% (326/763) | 82.7% (230/278) | 19.8% (96/485) |
+| Hub | Random K10 | 37.5% (288/767) | 95.7% (267/279) | 4.3% (21/488) |
+| Hub + Prompt | No perturb | 53.5% (411/768) | 48.6% (136/280) | 56.4% (275/488) |
+| Hub + Prompt | Clinical K5 | 43.6% (334/766) | 80.0% (224/280) | 22.6% (110/486) |
+| Hub + Prompt | Clinical K10 | 44.8% (344/768) | 87.5% (245/280) | 20.3% (99/488) |
+| Hub + Prompt | Random K5 | 47.2% (362/767) | 63.4% (177/279) | 37.9% (185/488) |
+| Hub + Prompt | Random K10 | 44.1% (338/766) | 66.8% (187/280) | 31.1% (151/486) |
+| Hub + Prompt + Net | No perturb | 52.9% (406/768) | 48.9% (137/280) | 55.1% (269/488) |
+| Hub + Prompt + Net | Clinical K5 | 41.0% (315/768) | 85.4% (239/280) | 15.6% (76/488) |
+| Hub + Prompt + Net | Clinical K10 | 41.0% (315/768) | 93.6% (262/280) | 10.9% (53/488) |
+| Hub + Prompt + Net | Random K5 | 46.5% (357/768) | 67.1% (188/280) | 34.6% (169/488) |
+| Hub + Prompt + Net | Random K10 | 44.8% (343/765) | 74.6% (208/279) | 27.8% (135/486) |
+
+</details>
+
+### Flip Rates and McNemar Test Results
+
+Results cover 768 subjects. Flip rate is the proportion of scorable subjects whose prediction changed. `b` and `c` are the discordant-pair counts used by McNemar's test. Bold p-values indicate `p < 0.05`; values shown as `<0.0001` were printed as `0.0000` in the source output.
+
+<details>
+<summary>DeepSeek-V4</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 46.8% | 187 | 153 | 0.0734 | 726 | 42 |
+| Hub | 5 | Random vs Clinical | 45.8% | 167 | 153 | 0.4675 | 698 | 70 |
+| Hub | 5 | Baseline vs Random | 45.5% | 176 | 155 | 0.2716 | 728 | 40 |
+| Hub | 10 | Baseline vs Clinical | 47.7% | 164 | 186 | 0.2616 | 733 | 35 |
+| Hub | 10 | Random vs Clinical | 46.8% | 152 | 178 | 0.1687 | 705 | 63 |
+| Hub | 10 | Baseline vs Random | 47.0% | 178 | 164 | 0.4821 | 727 | 41 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 30.6% | 104 | 118 | 0.3830 | 725 | 43 |
+| Hub + Prompt | 5 | Random vs Clinical | 25.6% | 88 | 103 | 0.3111 | 746 | 22 |
+| Hub + Prompt | 5 | Baseline vs Random | 31.5% | 112 | 111 | 1.0000 | 707 | 61 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 32.9% | 106 | 132 | 0.1049 | 723 | 45 |
+| Hub + Prompt | 10 | Random vs Clinical | 28.8% | 108 | 106 | 0.9455 | 743 | 25 |
+| Hub + Prompt | 10 | Baseline vs Random | 32.0% | 101 | 124 | 0.1423 | 704 | 64 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 42.7% | 149 | 171 | 0.2404 | 750 | 18 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 42.3% | 147 | 176 | 0.1191 | 763 | 5 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 43.1% | 164 | 159 | 0.8239 | 749 | 19 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 45.6% | 158 | 183 | 0.1936 | 747 | 21 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 45.1% | 167 | 175 | 0.7051 | 759 | 9 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 45.5% | 164 | 176 | 0.5509 | 748 | 20 |
+
+</details>
+
+<details>
+<summary>R1-Distill</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 40.5% | 175 | 123 | **0.0031** | 736 | 32 |
+| Hub | 5 | Random vs Clinical | 46.1% | 147 | 133 | 0.4373 | 608 | 160 |
+| Hub | 5 | Baseline vs Random | 49.3% | 170 | 135 | 0.0514 | 619 | 149 |
+| Hub | 10 | Baseline vs Clinical | 38.9% | 181 | 103 | **<0.0001** | 731 | 37 |
+| Hub | 10 | Random vs Clinical | 21.0% | 84 | 68 | 0.2236 | 723 | 45 |
+| Hub | 10 | Baseline vs Random | 40.6% | 179 | 120 | **0.0008** | 737 | 31 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 49.5% | 139 | 95 | **0.0048** | 473 | 295 |
+| Hub + Prompt | 5 | Random vs Clinical | 49.4% | 111 | 118 | 0.6918 | 464 | 304 |
+| Hub + Prompt | 5 | Baseline vs Random | 51.1% | 160 | 107 | **0.0014** | 523 | 245 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 60.4% | 170 | 106 | **0.0001** | 457 | 311 |
+| Hub + Prompt | 10 | Random vs Clinical | 43.7% | 75 | 88 | 0.3473 | 373 | 395 |
+| Hub + Prompt | 10 | Baseline vs Random | 58.5% | 158 | 99 | **0.0003** | 439 | 329 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 37.6% | 140 | 98 | **0.0077** | 633 | 135 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 39.2% | 113 | 118 | 0.7925 | 589 | 179 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 37.3% | 146 | 86 | **0.0001** | 622 | 146 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 51.8% | 189 | 126 | **0.0005** | 608 | 160 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 45.4% | 125 | 111 | 0.3975 | 520 | 248 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 40.2% | 134 | 93 | **0.0078** | 564 | 204 |
+
+</details>
+
+<details>
+<summary>Llama</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 44.3% | 197 | 143 | **0.0040** | 768 | 0 |
+| Hub | 5 | Random vs Clinical | 41.4% | 176 | 142 | 0.0641 | 768 | 0 |
+| Hub | 5 | Baseline vs Random | 33.3% | 138 | 118 | 0.2350 | 768 | 0 |
+| Hub | 10 | Baseline vs Clinical | 48.7% | 200 | 174 | 0.1960 | 768 | 0 |
+| Hub | 10 | Random vs Clinical | 45.3% | 190 | 158 | 0.0964 | 768 | 0 |
+| Hub | 10 | Baseline vs Random | 45.3% | 171 | 177 | 0.7887 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 42.3% | 184 | 141 | **0.0197** | 768 | 0 |
+| Hub + Prompt | 5 | Random vs Clinical | 31.4% | 114 | 127 | 0.4396 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Random | 38.0% | 174 | 118 | **0.0012** | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 47.5% | 201 | 164 | 0.0594 | 768 | 0 |
+| Hub + Prompt | 10 | Random vs Clinical | 44.7% | 181 | 162 | 0.3311 | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Random | 44.3% | 179 | 161 | 0.3566 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 38.3% | 164 | 130 | 0.0541 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 40.2% | 153 | 156 | 0.9094 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 38.9% | 168 | 131 | **0.0372** | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 43.1% | 173 | 158 | 0.4416 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 44.5% | 176 | 166 | 0.6266 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 40.8% | 159 | 154 | 0.8212 | 768 | 0 |
+
+</details>
+
+<details>
+<summary>Qwen2.5</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 2.3% | 11 | 7 | 0.4807 | 768 | 0 |
+| Hub | 5 | Random vs Clinical | 3.0% | 13 | 10 | 0.6776 | 768 | 0 |
+| Hub | 5 | Baseline vs Random | 2.5% | 10 | 9 | 1.0000 | 768 | 0 |
+| Hub | 10 | Baseline vs Clinical | 2.3% | 11 | 7 | 0.4807 | 768 | 0 |
+| Hub | 10 | Random vs Clinical | 1.6% | 8 | 4 | 0.3877 | 768 | 0 |
+| Hub | 10 | Baseline vs Random | 1.8% | 7 | 7 | 1.0000 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 3.1% | 15 | 9 | 0.3075 | 768 | 0 |
+| Hub + Prompt | 5 | Random vs Clinical | 5.9% | 23 | 22 | 1.0000 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Random | 3.3% | 15 | 10 | 0.4244 | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 2.6% | 11 | 9 | 0.8238 | 768 | 0 |
+| Hub + Prompt | 10 | Random vs Clinical | 13.8% | 30 | 76 | **<0.0001** | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Random | 13.0% | 74 | 26 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 0.1% | 0 | 1 | 1.0000 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 0.7% | 3 | 2 | 1.0000 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 0.5% | 1 | 3 | 0.6250 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 1.0% | 5 | 3 | 0.7266 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 6.1% | 18 | 29 | 0.1439 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 5.3% | 27 | 14 | 0.0596 | 768 | 0 |
+
+</details>
+
+<details>
+<summary>Qwen3</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 21.4% | 82 | 82 | 1.0000 | 768 | 0 |
+| Hub | 5 | Random vs Clinical | 40.2% | 192 | 117 | **<0.0001** | 768 | 0 |
+| Hub | 5 | Baseline vs Random | 38.4% | 110 | 185 | **<0.0001** | 768 | 0 |
+| Hub | 10 | Baseline vs Clinical | 18.5% | 81 | 61 | 0.1105 | 768 | 0 |
+| Hub | 10 | Random vs Clinical | 16.0% | 61 | 62 | 1.0000 | 768 | 0 |
+| Hub | 10 | Baseline vs Random | 20.4% | 89 | 68 | 0.1102 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 58.5% | 268 | 181 | **<0.0001** | 768 | 0 |
+| Hub + Prompt | 5 | Random vs Clinical | 38.8% | 150 | 148 | 0.9538 | 768 | 0 |
+| Hub + Prompt | 5 | Baseline vs Random | 54.8% | 253 | 168 | **<0.0001** | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 72.5% | 337 | 220 | **<0.0001** | 768 | 0 |
+| Hub + Prompt | 10 | Random vs Clinical | 25.9% | 95 | 104 | 0.5708 | 768 | 0 |
+| Hub + Prompt | 10 | Baseline vs Random | 67.4% | 322 | 196 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 62.8% | 299 | 183 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 34.5% | 129 | 136 | 0.7125 | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 62.4% | 301 | 178 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 74.5% | 357 | 215 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 20.8% | 90 | 70 | 0.1328 | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 70.8% | 333 | 211 | **<0.0001** | 768 | 0 |
+
+</details>
+
+<details>
+<summary>Luna</summary>
+
+| Format | K | Comparison | Flip rate | b | c | p-value | Scorable | Skipped |
+|:--|--:|:--|--:|--:|--:|--:|--:|--:|
+| Hub | 5 | Baseline vs Clinical | 20.2% | 78 | 77 | 1.0000 | 767 | 1 |
+| Hub | 5 | Random vs Clinical | 23.9% | 97 | 85 | 0.4149 | 762 | 6 |
+| Hub | 5 | Baseline vs Random | 18.6% | 65 | 77 | 0.3560 | 763 | 5 |
+| Hub | 10 | Baseline vs Clinical | 22.6% | 88 | 85 | 0.8792 | 766 | 2 |
+| Hub | 10 | Random vs Clinical | 17.1% | 53 | 78 | **0.0356** | 765 | 3 |
+| Hub | 10 | Baseline vs Random | 13.0% | 64 | 36 | **0.0066** | 767 | 1 |
+| Hub + Prompt | 5 | Baseline vs Clinical | 36.7% | 179 | 102 | **<0.0001** | 766 | 2 |
+| Hub + Prompt | 5 | Random vs Clinical | 28.4% | 123 | 94 | 0.0571 | 765 | 3 |
+| Hub + Prompt | 5 | Baseline vs Random | 26.1% | 124 | 76 | **0.0008** | 767 | 1 |
+| Hub + Prompt | 10 | Baseline vs Clinical | 43.6% | 201 | 134 | **0.0003** | 768 | 0 |
+| Hub + Prompt | 10 | Random vs Clinical | 27.7% | 103 | 109 | 0.7314 | 766 | 2 |
+| Hub + Prompt | 10 | Baseline vs Random | 32.5% | 160 | 89 | **<0.0001** | 766 | 2 |
+| Hub + Prompt + Net | 5 | Baseline vs Clinical | 39.5% | 197 | 106 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 5 | Random vs Clinical | 24.7% | 116 | 74 | **0.0028** | 768 | 0 |
+| Hub + Prompt + Net | 5 | Baseline vs Random | 24.9% | 120 | 71 | **0.0005** | 768 | 0 |
+| Hub + Prompt + Net | 10 | Baseline vs Clinical | 46.2% | 223 | 132 | **<0.0001** | 768 | 0 |
+| Hub + Prompt + Net | 10 | Random vs Clinical | 24.7% | 109 | 80 | **0.0414** | 765 | 3 |
+| Hub + Prompt + Net | 10 | Baseline vs Random | 34.6% | 163 | 102 | **0.0002** | 765 | 3 |
+
+</details>
+
 ---
 
 ## RQ5 — Reasoning Fidelity (`RQ5/`)
